@@ -37,11 +37,12 @@ def apply_filter(frame):
 
     return frame
 
+# for live webcam : 
+cap = cv.VideoCapture(0)
 
-# cap = cv.VideoCapture(0)
-
-video_path = 'sample_video.mp4'
-cap = cv.VideoCapture(video_path)
+# for sample video : 
+# video_path = 'sample_video.mp4'
+# cap = cv.VideoCapture(video_path)
 
 
 while (True):
