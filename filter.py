@@ -8,9 +8,7 @@ predictor = dl.shape_predictor('shape_predictor_68_face_landmarks.dat')
 ronaldo_img = cv.imread("ronaldo.jpeg")
 ronaldo_gray = cv.cvtColor(ronaldo_img,cv.COLOR_BGR2GRAY)
 
-ronaldo_face = haar_cascade.detectMultiScale(ronaldo_gray,scaleFactor=1.1,minNeighbors=4)
-if len(ronaldo_face == 0):
-    raise Exception('no face found in the image ')
+ronaldo_face = haar_cascade.detectMultiScale(ronaldo_gray,scaleFactor=1.1,minNeighbors=6)
 x,y,w,h = ronaldo_face[0]
 rect = dl.rectangle(x,y,x+w,y+h)
 ronaldo_landmarks = predictor(ronaldo_gray,rect)
@@ -40,18 +38,25 @@ def apply_filter(frame):
     return frame
 
 
-cap = cv.VideoCapture(0)
+# cap = cv.VideoCapture(0)
 
-while True:
+video_path = 'sample_video.mp4'
+cap = cv.VideoCapture(video_path)
+
+
+while (True):
     ret, frame = cap.read()
     if not ret : 
         break
 
     frame = apply_filter(frame)
     cv.imshow('deep fake filter',frame)
-
-    if cv.waitkey(1) and 0xFF == ord('q'):
+    # if cv.waitKey(1) and 0xFF == ord('a'):
+    key = cv.waitKey(1) & 0xFF
+    if key == ord('q'):
         break
+    
+
 
 cap.release()
 cv.destroyAllWindows()
