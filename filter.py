@@ -52,7 +52,6 @@ while (True):
 
     frame = apply_filter(frame)
     cv.imshow('deep fake filter',frame)
-    # if cv.waitKey(1) and 0xFF == ord('a'):
     key = cv.waitKey(1) & 0xFF
     if key == ord('q'):
         break
